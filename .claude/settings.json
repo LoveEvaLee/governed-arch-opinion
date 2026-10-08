@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "deny": [
+      "Edit(raw/**)",
+      "Edit(private/원문/**)",
+      "Edit(강의자료/**)",
+      "Bash(rm *)"
+    ],
+    "ask": [
+      "Bash(git push *)",
+      "Bash(git commit *)"
+    ],
+    "allow": [
+      "Edit(out/**)"
+    ]
+  }
+}

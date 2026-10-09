@@ -1,1 +1,133 @@
-<mxfile host="drawio" type="device"><diagram id="agents" name="에이전트 구성도"><mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1900" pageHeight="760" math="0" shadow="0"><root><mxCell id="0" /><mxCell id="1" parent="0" /><mxCell id="title" value="&lt;b&gt;에이전트·작업 구성도&lt;/b&gt; — 에이전트 6개 (02_기획안 「형태」 기준, 2026-10-09)" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=11;fontSize=14;" vertex="1" parent="1"><mxGeometry x="30" y="4" width="900" height="26" as="geometry" /></mxCell><mxCell id="grp_run" value="실행 위치 — 개인 맥 · VM" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;verticalAlign=top;align=left;spacingLeft=8;spacingTop=4;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="255" y="40" width="1325" height="530" as="geometry" /></mxCell><mxCell id="grp_out" value="산출물" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;verticalAlign=top;align=left;spacingLeft=8;spacingTop=4;fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="1260" y="48" width="300" height="490" as="geometry" /></mxCell><mxCell id="in_pub" value="&lt;b&gt;공개 자료&lt;/b&gt;&lt;br&gt;동향 · 매뉴얼 · 사례 (형식 〔미정〕)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#333333;fontSize=12;spacing=6;" vertex="1" parent="1"><mxGeometry x="30" y="68" width="200" height="64" as="geometry" /></mxCell><mxCell id="in_ctx" value="&lt;b&gt;회사 맥락&lt;/b&gt;&lt;br&gt;일반화한 텍스트 · 실제 값 제외" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#333333;fontSize=12;spacing=6;" vertex="1" parent="1"><mxGeometry x="30" y="198" width="200" height="64" as="geometry" /></mxCell><mxCell id="in_vendor" value="&lt;b&gt;운영사 안&lt;/b&gt;&lt;br&gt;일반화한 텍스트 (구성요소 · 연결 관계)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#333333;fontSize=12;spacing=6;" vertex="1" parent="1"><mxGeometry x="30" y="328" width="200" height="64" as="geometry" /></mxCell><mxCell id="a1" value="&lt;b&gt;① 동향 수집&lt;/b&gt; — 영역별 동향·사례를 모으고 출처·날짜·신뢰도를 붙인다" style="rounded=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#333333;fontSize=12;spacing=6;" vertex="1" parent="1"><mxGeometry x="640" y="60" width="250" height="80" as="geometry" /></mxCell><mxCell id="a2" value="&lt;b&gt;② 맥락&lt;/b&gt; (내용 비공개) — 회사의 고정 구조·정책·제약·평가 가중치를 보유한다" style="rounded=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#333333;fontSize=12;spacing=6;" vertex="1" parent="1"><mxGeometry x="275" y="190" width="230" height="80" as="geometry" /></mxCell><mxCell id="a3" value="&lt;b&gt;③ 제안&lt;/b&gt; — ①의 자료와 ②의 맥락으로 평가 축에 따라 구조안을 만든다" style="rounded=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#333333;fontSize=12;spacing=6;" vertex="1" parent="1"><mxGeometry x="640" y="190" width="250" height="80" as="geometry" /></mxCell><mxCell id="a4" value="&lt;b&gt;④ 비교분석&lt;/b&gt; — 운영사 안과 우리 안을 같은 표기규칙으로 옮겨 차이를 뽑는다" style="rounded=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#333333;fontSize=12;spacing=6;" vertex="1" parent="1"><mxGeometry x="640" y="320" width="250" height="80" as="geometry" /></mxCell><mxCell id="a5" value="&lt;b&gt;⑤ 검증&lt;/b&gt; — 양쪽 주장의 근거(비용 산식·출처·전제)를 확인한다. ③의 안도 같이 공격한다" style="rounded=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#333333;fontSize=12;spacing=6;" vertex="1" parent="1"><mxGeometry x="640" y="450" width="250" height="80" as="geometry" /></mxCell><mxCell id="a6" value="&lt;b&gt;⑥ 작도&lt;/b&gt; — 표기규칙에 맞춰 구성도(draw.io)와 흐름도(Mermaid)를 그린다" style="rounded=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#333333;fontSize=12;spacing=6;" vertex="1" parent="1"><mxGeometry x="980" y="255" width="220" height="80" as="geometry" /></mxCell><mxCell id="o1" value="refs/ 영역별 레퍼런스 · 비교표 (공개)" style="shape=note;size=12;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#333333;fontSize=11;align=left;spacingLeft=8;" vertex="1" parent="1"><mxGeometry x="1280" y="75" width="260" height="50" as="geometry" /></mxCell><mxCell id="o3" value="우리안.md — 대안 3개 이상, 근거 첨부 (비공개)" style="shape=note;size=12;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#333333;fontSize=11;align=left;spacingLeft=8;" vertex="1" parent="1"><mxGeometry x="1280" y="189" width="260" height="50" as="geometry" /></mxCell><mxCell id="o6" value="구성도 .drawio · 흐름도 Mermaid (공개 예시는 out/, 사례는 비공개)" style="shape=note;size=12;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#333333;fontSize=11;align=left;spacingLeft=8;" vertex="1" parent="1"><mxGeometry x="1280" y="270" width="260" height="50" as="geometry" /></mxCell><mxCell id="o4" value="비교표.md — 평가 축 7 × 안 3개 이상 (비공개)" style="shape=note;size=12;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#333333;fontSize=11;align=left;spacingLeft=8;" vertex="1" parent="1"><mxGeometry x="1280" y="351" width="260" height="50" as="geometry" /></mxCell><mxCell id="o5" value="검증.md — 주장 판정 · 운영사 질문 목록 (비공개)" style="shape=note;size=12;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#333333;fontSize=11;align=left;spacingLeft=8;" vertex="1" parent="1"><mxGeometry x="1280" y="465" width="260" height="50" as="geometry" /></mxCell><mxCell id="human" value="&lt;b&gt;사람&lt;/b&gt;&lt;br&gt;실행 지시 · 최종 판정 (데이터 정책 축 포함) · 결과물을 회사 PC로 가져가 협의" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#333333;fontSize=12;spacing=6;" vertex="1" parent="1"><mxGeometry x="1640" y="220" width="210" height="110" as="geometry" /></mxCell><mxCell id="e_pub" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#333333;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="in_pub" target="a1"><mxGeometry relative="1" as="geometry" /></mxCell><mxCell id="e_ctx" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#333333;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="in_ctx" target="a2"><mxGeometry relative="1" as="geometry" /></mxCell><mxCell id="e_vendor" value="운영사 안" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#333333;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="in_vendor" target="a4"><mxGeometry relative="1" as="geometry" /></mxCell><mxCell id="e_13" value="근거 자료" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#333333;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="a1" target="a3"><mxGeometry relative="1" as="geometry" /></mxCell><mxCell id="e_23" value="조건 · 가중치" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#333333;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="a2" target="a3"><mxGeometry relative="1" as="geometry" /></mxCell><mxCell id="e_34" value="우리 안" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#333333;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="a3" target="a4"><mxGeometry relative="1" as="geometry" /></mxCell><mxCell id="e_45" value="비교표 · 양쪽 주장" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#333333;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="a4" target="a5"><mxGeometry relative="1" as="geometry" /></mxCell><mxCell id="e_15" value="refs/" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#333333;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.8;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="a1" target="a5"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="615" y="124" /><mxPoint x="615" y="510" /></Array></mxGeometry></mxCell><mxCell id="e_36" value="우리 안" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#333333;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.7;exitDx=0;exitDy=0;entryX=0;entryY=0.375;entryDx=0;entryDy=0;" edge="1" parent="1" source="a3" target="a6"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="935" y="246" /><mxPoint x="935" y="285" /></Array></mxGeometry></mxCell><mxCell id="e_46" value="두 안" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#333333;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.6875;entryDx=0;entryDy=0;" edge="1" parent="1" source="a4" target="a6"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="945" y="344" /><mxPoint x="945" y="310" /></Array></mxGeometry></mxCell><mxCell id="e_o1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#333333;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="a1" target="o1"><mxGeometry relative="1" as="geometry" /></mxCell><mxCell id="e_o3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#333333;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="a3" target="o3"><mxGeometry relative="1" as="geometry" /></mxCell><mxCell id="e_o4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#333333;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.7;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="a4" target="o4"><mxGeometry relative="1" as="geometry" /></mxCell><mxCell id="e_o5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#333333;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="a5" target="o5"><mxGeometry relative="1" as="geometry" /></mxCell><mxCell id="e_o6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#333333;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="a6" target="o6"><mxGeometry relative="1" as="geometry" /></mxCell><mxCell id="e_out" value="열어서 판정" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#333333;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.43;exitDx=0;exitDy=0;entryX=0;entryY=0.35;entryDx=0;entryDy=0;" edge="1" parent="1" source="grp_out" target="human"><mxGeometry relative="1" as="geometry" /></mxCell><mxCell id="c_run" value="실행 (02 「처리」 1~7 순서)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#333333;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#FFFFFF;dashed=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.58;entryDx=0;entryDy=0;" edge="1" parent="1" source="human" target="grp_run"><mxGeometry relative="1" as="geometry" /></mxCell><mxCell id="legend" value="&lt;b&gt;범례&lt;/b&gt; — 둥근 사각형: 에이전트 · 사각형: 입력원·사람 · 접힌 모서리: 산출물 파일 · 실선 화살표: 데이터 흐름 · 점선 화살표: 제어(실행 지시)&lt;br&gt;&lt;b&gt;기준 문서&lt;/b&gt; — 평가 축 7개(rubric/평가축.md): ③④⑤ 공통 · 표기규칙(layouts/표기규칙.md): ④⑥ 공통" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=11;" vertex="1" parent="1"><mxGeometry x="255" y="585" width="1325" height="44" as="geometry" /></mxCell></root></mxGraphModel></diagram></mxfile>
+<mxfile host="drawio" type="device">
+  <diagram id="agents" name="에이전트 구성도">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1900" pageHeight="760" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="&lt;b&gt;에이전트·작업 구성도&lt;/b&gt; — 에이전트 6개 (02_기획안 「형태」 기준, 2026-10-09)" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=11;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="30" y="4" width="900" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="grp_run" value="실행 위치 — 개인 맥 · VM" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;verticalAlign=top;align=left;spacingLeft=8;spacingTop=4;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="255" y="40" width="1325" height="530" as="geometry" />
+        </mxCell>
+        <mxCell id="grp_out" value="산출물" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;verticalAlign=top;align=left;spacingLeft=8;spacingTop=4;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1260" y="48" width="300" height="490" as="geometry" />
+        </mxCell>
+        <mxCell id="in_pub" value="&lt;b&gt;공개 자료&lt;/b&gt;&lt;br&gt;동향 · 매뉴얼 · 사례 (형식 〔미정〕)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#333333;fontSize=12;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="30" y="68" width="200" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="in_ctx" value="&lt;b&gt;회사 맥락&lt;/b&gt;&lt;br&gt;일반화한 텍스트 · 실제 값 제외" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#333333;fontSize=12;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="30" y="198" width="200" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="in_vendor" value="&lt;b&gt;운영사 안&lt;/b&gt;&lt;br&gt;일반화한 텍스트 (구성요소 · 연결 관계)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#333333;fontSize=12;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="30" y="328" width="200" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" value="&lt;b&gt;① 동향 수집&lt;/b&gt; — 영역별 동향·사례를 모으고 출처·날짜·신뢰도를 붙인다" style="rounded=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#333333;fontSize=12;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="640" y="60" width="250" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" value="&lt;b&gt;② 맥락&lt;/b&gt; (내용 비공개) — 회사의 고정 구조·정책·제약·평가 가중치를 보유한다" style="rounded=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#333333;fontSize=12;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="275" y="190" width="230" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" value="&lt;b&gt;③ 제안&lt;/b&gt; — ①의 자료와 ②의 맥락으로 평가 축에 따라 구조안을 만든다" style="rounded=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#333333;fontSize=12;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="640" y="190" width="250" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="a4" value="&lt;b&gt;④ 비교분석&lt;/b&gt; — 운영사 안과 우리 안을 같은 표기규칙으로 옮겨 차이를 뽑는다" style="rounded=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#333333;fontSize=12;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="640" y="320" width="250" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="a5" value="&lt;b&gt;⑤ 검증&lt;/b&gt; — 양쪽 주장의 근거(비용 산식·출처·전제)를 확인한다. ③의 안도 같이 공격한다" style="rounded=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#333333;fontSize=12;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="640" y="450" width="250" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="a6" value="&lt;b&gt;⑥ 작도&lt;/b&gt; — 표기규칙에 맞춰 구성도(draw.io)와 흐름도(Mermaid)를 그린다" style="rounded=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#333333;fontSize=12;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="980" y="255" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="o1" value="refs/ 영역별 레퍼런스 · 비교표 (공개)" style="shape=note;size=12;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#333333;fontSize=11;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="1280" y="75" width="260" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="o3" value="우리안.md — 대안 3개 이상, 근거 첨부 (비공개)" style="shape=note;size=12;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#333333;fontSize=11;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="1280" y="189" width="260" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="o6" value="구성도 .drawio · 흐름도 Mermaid (공개 예시는 out/, 사례는 비공개)" style="shape=note;size=12;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#333333;fontSize=11;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="1280" y="270" width="260" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="o4" value="비교표.md — 평가 축 7 × 안 3개 이상 (비공개)" style="shape=note;size=12;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#333333;fontSize=11;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="1280" y="351" width="260" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="o5" value="검증.md — 주장 판정 · 운영사 질문 목록 (비공개)" style="shape=note;size=12;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#333333;fontSize=11;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="1280" y="465" width="260" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="human" value="&lt;b&gt;사람&lt;/b&gt;&lt;br&gt;실행 지시 · 최종 판정 (데이터 정책 축 포함) · 결과물을 회사 PC로 가져가 협의" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#333333;fontSize=12;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="1640" y="220" width="210" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="e_pub" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#333333;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="in_pub" target="a1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ctx" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#333333;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="in_ctx" target="a2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_vendor" value="운영사 안" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#333333;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="in_vendor" target="a4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_13" value="근거 자료" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#333333;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="a1" target="a3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_23" value="조건 · 가중치" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#333333;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="a2" target="a3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_34" value="우리 안" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#333333;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="a3" target="a4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_45" value="비교표 · 양쪽 주장" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#333333;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="a4" target="a5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_15" value="refs/" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#333333;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.8;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="a1" target="a5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="615" y="124" />
+              <mxPoint x="615" y="510" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_36" value="우리 안" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#333333;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.7;exitDx=0;exitDy=0;entryX=0;entryY=0.375;entryDx=0;entryDy=0;" edge="1" parent="1" source="a3" target="a6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="935" y="246" />
+              <mxPoint x="935" y="285" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_46" value="두 안" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#333333;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.6875;entryDx=0;entryDy=0;" edge="1" parent="1" source="a4" target="a6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="945" y="344" />
+              <mxPoint x="945" y="310" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_o1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#333333;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="a1" target="o1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_o3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#333333;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="a3" target="o3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_o4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#333333;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.7;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="a4" target="o4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_o5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#333333;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="a5" target="o5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_o6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#333333;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="a6" target="o6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_out" value="열어서 판정" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#333333;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.43;exitDx=0;exitDy=0;entryX=0;entryY=0.35;entryDx=0;entryDy=0;" edge="1" parent="1" source="grp_out" target="human">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_run" value="실행 (02 「처리」 1~7 순서)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#333333;jumpStyle=arc;jumpSize=10;fontSize=11;labelBackgroundColor=#FFFFFF;dashed=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.58;entryDx=0;entryDy=0;" edge="1" parent="1" source="human" target="grp_run">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" value="&lt;b&gt;범례&lt;/b&gt; — 둥근 사각형: 에이전트 · 사각형: 입력원·사람 · 접힌 모서리: 산출물 파일 · 실선 화살표: 데이터 흐름 · 점선 화살표: 제어(실행 지시)&lt;br&gt;&lt;b&gt;기준 문서&lt;/b&gt; — 평가 축 7개(rubric/평가축.md): ③④⑤ 공통 · 표기규칙(layouts/표기규칙.md): ④⑥ 공통" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="255" y="585" width="1325" height="44" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

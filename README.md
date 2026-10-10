@@ -5,7 +5,9 @@
 
 기준 구조는 AWS Control Tower 랜딩존이며, 회사별 조건만 바꿔 넣으면 어느 조직에서나 쓸 수 있게 설계했습니다.
 
-![에이전트 구성도](out/에이전트_구성도.png)
+![46초 소개 영상 — 문제, 에이전트 구성, 판단 원칙, 근거 먼저 실험](docs/media/intro.gif)
+
+<sub>고화질 영상: [docs/media/intro.mp4](docs/media/intro.mp4) · 정지 구성도: [out/에이전트_구성도.png](out/에이전트_구성도.png)</sub>
 
 ## 이런 상황에서 씁니다
 

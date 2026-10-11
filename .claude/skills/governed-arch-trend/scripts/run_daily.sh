@@ -12,7 +12,8 @@ export GAT_STATE="${GAT_STATE:-$HOME/한양대학교/governed-arch-trend}"
 DATA="$GAT_STATE/_data"
 TODAY=$(date +%Y-%m-%d)
 LOG="$DATA/cron.log"
-mkdir -p "$DATA"
+mkdir -p "$DATA/digests" "$GAT_STATE/queue"
+export PYTHONDONTWRITEBYTECODE=1  # 공개 저장소 사본에 __pycache__를 남기지 않는다
 
 # headless claude 인증 — 맥은 키체인, VM은 호출자가 CLAUDE_CODE_OAUTH_TOKEN을 넘긴다
 if [ -z "$CLAUDE_CODE_OAUTH_TOKEN" ] && command -v security >/dev/null 2>&1; then
@@ -97,7 +98,8 @@ COLLECTED=$(python3 -c "import json;print(len(json.load(open('$DATA/collected/$T
 
 # 4. 큐레이션 — 후보 풀이 비면 claude를 부르지 않고 빈 digest
 if [ "$POOLED" = "0" ]; then
-  python3 -c "import json;json.dump({'date':'$TODAY','collected':$COLLECTED,'pooled':0,'dropped':0,'candidates':[]},open('$DATA/digests/$TODAY.json','w'),ensure_ascii=False)"
+  python3 -c "import json;json.dump({'date':'$TODAY','collected':$COLLECTED,'pooled':0,'dropped':0,'candidates':[]},open('$DATA/digests/$TODAY.json','w'),ensure_ascii=False)" >> "$LOG" 2>&1 \
+    || { notify "governed-arch-trend: 빈 digest 쓰기 실패" "로그: $LOG"; exit 1; }
   echo "[2/4] 후보 풀 0건 — 큐레이션 생략" >> "$LOG"
 else
   CLAUDE_BIN="${CLAUDE_BIN:-$(command -v claude 2>/dev/null)}"

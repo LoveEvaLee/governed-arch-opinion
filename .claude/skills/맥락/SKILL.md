@@ -23,7 +23,7 @@ description: 회사별 고정 구조·정책·제약·평가 가중치를 `priva
 
 ## 입력
 
-`private/` — `private/맥락.md`, `private/가중치.md`, `private/기준선_구조.md`
+`private/` — `private/맥락.md`, `private/가중치.md`, `private/기준선_구조.md`, 사례별 요구는 `private/사례/<사례명>/운영사안.md` 「이 건의 요구」
 
 ## 출력
 
@@ -37,4 +37,4 @@ description: 회사별 고정 구조·정책·제약·평가 가중치를 `priva
 
 ## 현재 상태
 
-뼈대만. 비공개 쪽 `맥락.md` · `가중치.md` 미작성.
+입력 템플릿 작성(2026-10-11) — `맥락.md` · `가중치.md` · `사례/ETL전환/운영사안.md`. 내용은 미입력(전부 〔미정〕).

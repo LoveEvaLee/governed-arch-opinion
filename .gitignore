@@ -49,3 +49,7 @@ Thumbs.db
 # ── Claude Code 개인 설정 ──
 # 개인 권한 허용 목록(공유용 settings.json은 저장소에 남김)
 .claude/settings.local.json
+
+# ── Node 의존성 ──
+# pi 로컬 설치물(package.json으로 재설치 가능)
+node_modules/

@@ -1,0 +1,56 @@
+{
+  "_comment": "감시 대상 별칭. 선택지 이름은 refs 「선택지 요약」에서 자동으로 읽고(build_watch.py), 여기에는 같은 것을 다르게 부르는 이름과 영역 키워드만 둔다. 키는 refs 파일 이름(확장자 제외)과 선택지 이름.",
+  "areas": {
+    "ETL오케스트레이션": {
+      "area_name": "ETL · 오케스트레이션",
+      "keywords": [
+        "orchestration",
+        "orchestrator",
+        "workflow",
+        "ETL",
+        "ELT",
+        "data pipeline",
+        "데이터 파이프라인",
+        "오케스트레이션",
+        "워크플로",
+        "스케줄러",
+        "DAG"
+      ],
+      "options": {
+        "AWS Glue": [
+          "AWS Glue",
+          "Glue job",
+          "Glue Data Catalog",
+          "Glue 6",
+          "Glue ETL"
+        ],
+        "Amazon MWAA": [
+          "MWAA",
+          "Managed Workflows for Apache Airflow"
+        ],
+        "AWS Step Functions": [
+          "Step Functions",
+          "Amazon States Language"
+        ],
+        "Apache Airflow 직접 운영": [
+          "Apache Airflow",
+          "Airflow",
+          "Airflow 3",
+          "Airflow Helm"
+        ],
+        "dbt": [
+          "dbt",
+          "dbt Core",
+          "dbt platform",
+          "dbt Cloud",
+          "dbt-oss"
+        ],
+        "Cloud Composer": [
+          "Cloud Composer",
+          "Managed Service for Apache Airflow",
+          "Composer 3"
+        ]
+      }
+    }
+  }
+}

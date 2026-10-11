@@ -51,6 +51,55 @@
           "Composer 3"
         ]
       }
+    },
+    "AI플랫폼": {
+      "area_name": "AI · 에이전트 플랫폼",
+      "keywords": [
+        "agent runtime",
+        "AI agent",
+        "agentic",
+        "LLM gateway",
+        "model gateway",
+        "MCP",
+        "Model Context Protocol",
+        "A2A",
+        "guardrail",
+        "RAG",
+        "knowledge base",
+        "inference",
+        "LLM serving",
+        "에이전트",
+        "가드레일"
+      ],
+      "options": {
+        "Amazon Bedrock AgentCore": [
+          "AgentCore",
+          "Bedrock AgentCore"
+        ],
+        "Amazon Bedrock": [
+          "Amazon Bedrock",
+          "Bedrock Knowledge Bases",
+          "Bedrock Guardrails",
+          "Bedrock"
+        ],
+        "LangGraph": [
+          "LangGraph",
+          "LangSmith Deployment",
+          "LangGraph Platform"
+        ],
+        "LiteLLM 직접 운영": [
+          "LiteLLM"
+        ],
+        "Vertex AI Agent Engine": [
+          "Agent Engine",
+          "Vertex AI Agent Engine",
+          "Agent Runtime",
+          "Gemini Enterprise Agent Platform"
+        ],
+        "vLLM 직접 운영": [
+          "vLLM"
+        ]
+      }
     }
   }
 }

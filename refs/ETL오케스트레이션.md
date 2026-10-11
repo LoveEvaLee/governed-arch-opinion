@@ -1,6 +1,6 @@
 # 참조 — ETL · 오케스트레이션
 
-수집일: 2026-10-11 · 검색 29회 / 상한 40회 · 버린 건 39건 · 영역 3-1
+수집일: 2026-10-11 · 검색 29회 / 상한 40회 · 버린 건 27건 · 선택지당 근거 상한 10건 · 영역 3-1
 
 **이 파일의 결정 (2026-10-11 유경)**
 
@@ -15,12 +15,12 @@
 
 | 선택지 | 맡는 층 | 종류 | 상태 (확인 2026-10-11) | 근거 건수 (A/B/C/D) |
 |---|---|---|---|---|
-| AWS Glue | ETL (+ 워크플로) | 관리형 | GA — 6.0 GA 2026-08-21, 0.9 · 1.0 · 2.0은 2026-04-01 EOL | 7 / 0 / 0 / 0 |
-| Amazon MWAA | 오케스트레이션 | 관리형 (오픈소스 Airflow) | GA — 최신 지원 v3.3.1(2026-09-01) | 6 / 1 / 0 / 0 |
-| AWS Step Functions | 오케스트레이션 | 관리형 (서버리스) | 〔미정〕 — GA 명시 페이지 미확인, 지원 종료 예고 없음 | 6 / 1 / 0 / 0 |
-| Apache Airflow 직접 운영 | 오케스트레이션 | 직접 운영 | GA — Airflow 3 Maintenance, Airflow 2는 2026-04-22 EOL | 7 / 0 / 0 / 0 |
-| dbt | 변환 (ELT) | 직접 운영(Core) · 타사 SaaS(platform) | GA — v2.0 2026-09-14 출시 | 6 / 1 / 0 / 0 |
-| Cloud Composer | 오케스트레이션 | 타사 관리형 (GCP Airflow) | GA — Gen 1은 2026-09-15 지원 종료, 2026-04-15 Managed Service for Apache Airflow로 개명 | 6 / 1 / 0 / 0 |
+| AWS Glue | ETL (+ 워크플로) | 관리형 | GA — 6.0 GA 2026-08-21, 0.9 · 1.0 · 2.0은 2026-04-01 EOL | 10 / 0 / 0 / 0 |
+| Amazon MWAA | 오케스트레이션 | 관리형 (오픈소스 Airflow) | GA — 최신 지원 v3.3.1(2026-09-01) | 8 / 1 / 0 / 0 |
+| AWS Step Functions | 오케스트레이션 | 관리형 (서버리스) | 〔미정〕 — GA 명시 페이지 미확인, 지원 종료 예고 없음 | 7 / 1 / 0 / 0 |
+| Apache Airflow 직접 운영 | 오케스트레이션 | 직접 운영 | GA — Airflow 3 Maintenance, Airflow 2는 2026-04-22 EOL | 8 / 1 / 0 / 0 |
+| dbt | 변환 (ELT) | 직접 운영(Core) · 타사 SaaS(platform) | GA — v2.0 2026-09-14 출시 | 8 / 1 / 0 / 0 |
+| Cloud Composer | 오케스트레이션 | 타사 관리형 (GCP Airflow) | GA — Gen 1은 2026-09-15 지원 종료, 2026-04-15 Managed Service for Apache Airflow로 개명 | 8 / 1 / 0 / 0 |
 
 ---
 
@@ -112,17 +112,52 @@
 | 전제 조건 | 에이전트 실행 환경에 AWS 자격 증명과 IAM 정책. Lake Formation 권한까지 전파되는지 〔미정〕 |
 | 걸리는 평가 축 | AI 인프라 적합성 — 공개 표준 연계(MCP), 메타데이터 · 스키마 노출, 작업 호출 · 결과 수신, 권한 전파(IAM) |
 
+### 근거 8 — CloudTrail로 Glue API 호출 기록
+
+| 항목 | 내용 |
+|---|---|
+| 출처 | Logging AWS Glue API calls with AWS CloudTrail · AWS 문서 · https://docs.aws.amazon.com/glue/latest/dg/monitor-cloudtrail.html |
+| 날짜 | 상시 갱신 — 확인 2026-10-11 기준 |
+| 등급 | A — Glue의 모든 API 작업(콘솔 · 코드 호출 모두)이 CloudTrail 이벤트로 남음 — 누가(루트 / IAM / 임시 자격 증명 / 다른 AWS 서비스), 언제, 어느 IP에서, 어떤 파라미터로. 트레일을 만들면 S3로 계속 전달, 여러 리전 · 계정 로그를 모을 수 있음. 연결 요청의 `ConnectionProperties` 같은 민감 값은 기록하지 않고, GetTable · GetJobRun · GetPartitions 등 여러 Get 계열 응답은 null로 남김 |
+| 적용 상황 | Glue 작업 · 카탈로그 · 연결을 누가 만들고 바꾸고 지웠는지를 중앙 감사 로그로 추적 |
+| 구성 요소 | AWS CloudTrail(Event history, 트레일), 로그 수신 S3 버킷, 필요 시 SNS |
+| 전제 조건 | 오래 보관하려면 트레일 필요. API(관리) 호출 기록만 다룸 — 작업이 S3 데이터를 실제로 읽고 쓴 기록(데이터 이벤트)은 〔미정〕 |
+| 걸리는 평가 축 | 효율 — 기존 로깅 · 감사 연결 / 데이터 정책 — 접근 기록(API 수준) / 커스터마이징 — 중앙 로깅(여러 계정 · 리전 수집) |
+
+### 근거 9 — Data Catalog의 Iceberg REST 엔드포인트 (공개 사양 API)
+
+| 항목 | 내용 |
+|---|---|
+| 출처 | Connecting to the Data Catalog using AWS Glue Iceberg REST endpoint · AWS 문서 · https://docs.aws.amazon.com/glue/latest/dg/connect-glu-iceberg-rest.html |
+| 날짜 | 상시 갱신 — 확인 2026-10-11 기준 |
+| 등급 | A — Data Catalog가 Apache Iceberg REST 사양 API 제공(`https://glue.{리전}.amazonaws.com/iceberg`). Iceberg REST 클라이언트를 쓰는 엔진이 SigV4로 접속. 지원 API: GetConfig, 네임스페이스 생성 · 조회 · 수정 · 삭제, 테이블 목록 · 생성 · 로드 · 존재 확인 · 수정 · 삭제. Iceberg 테이블 사양 v1 · v2(기본 v2). S3와 S3 Tables의 Iceberg 테이블 모두. 네임스페이스는 한 단계, 다단계 카탈로그는 `catalog.namespace.table` 표기 |
+| 적용 상황 | Glue 밖의 엔진 · 애플리케이션이 공개 표준 API로 같은 카탈로그를 읽고 쓰거나, 다른 카탈로그로 옮길 경로를 확보할 때 |
+| 구성 요소 | Glue Data Catalog(Iceberg REST 엔드포인트), Iceberg REST 클라이언트, IAM(SigV4) |
+| 전제 조건 | 테이블이 Iceberg 형식, 호출 주체의 SigV4 서명. Lake Formation 권한 적용 방식 · 지원 엔진 목록 〔미정〕 |
+| 걸리는 평가 축 | 동향 적합성 — 종속성(공개 포맷 · 이관 경로) / AI 인프라 적합성 — 데이터 읽기 인터페이스, 공개 표준 연계, 메타데이터 · 스키마 노출 |
+
+### 근거 10 — VPC 안에서 실행: ENI · 사설 IP · 보안 그룹, 인터넷은 NAT 경유
+
+| 항목 | 내용 |
+|---|---|
+| 출처 | Setting up network access to data stores · AWS 문서 · https://docs.aws.amazon.com/glue/latest/dg/start-connecting.html |
+| 날짜 | 상시 갱신 — 확인 2026-10-11 기준 |
+| 등급 | A — S3 → S3 작업은 VPC 설정 불필요. 사설 서브넷 JDBC 원천처럼 VPC 안에서 돌아야 하는 작업은 지정 서브넷에 ENI를 만들어 사설 IP만 붙이고(공인 IP 없음) Glue 연결의 보안 그룹 적용. VPC 안에서 S3 접근은 VPC 엔드포인트, VPC 자원과 인터넷 모두 접근은 NAT 게이트웨이 필요. 작업 하나는 VPC · 서브넷 하나에만 붙음. 다른 VPC 원천은 피어링이나 S3 중간 저장. VPC DNS 설정 필요 |
+| 적용 상황 | 사설망 DB 원천을 처리하면서 네트워크 경로를 VPC · 보안 그룹 · 엔드포인트로 묶을 때 |
+| 구성 요소 | Glue 연결, 서브넷, 보안 그룹, ENI, S3 VPC 엔드포인트, (필요 시) NAT 게이트웨이, VPC 피어링 |
+| 전제 조건 | 원천이 지정 서브넷에서 닿고 VPC DNS 설정. 여러 VPC에 걸친 원천은 피어링이나 작업 분할 |
+| 걸리는 평가 축 | 커스터마이징 — 네트워크(VPC) / 데이터 정책 — 반출 경로 통제(공인 IP 없음, 인터넷은 NAT 경유) |
+
 ### 비어 있는 것
 
 - 비용 — 운영 인력, 전환 비용
 - 효과 — 처리량 · 지연 · 가용성의 정량 SLA, 원천 · 대상 연결(커넥터 목록), 기존 작업 이관 사례
-- 효율 — 기존 모니터링 · 로깅 · 감사 연결, 관리형 / 직접 운영 비중의 명시 근거
-- 동향 적합성 — 운영 사례, 로드맵 방향, 현행 5.x · 6.0의 지원 종료 예정일, 이관 경로(외부 엔진이 쓰는 공개 카탈로그 API)
-- 커스터마이징 — 네트워크(VPC 서브넷 · ENI · 보안 그룹), 중앙 ID · SSO 연동, 가드레일 예외 필요 여부, 태깅 · 중앙 로깅
-- 데이터 정책 — 분류 · 민감정보 식별, 접근 기록, 반출 경로 통제 · 처리 위치, 보존 · 삭제
-- AI 인프라 적합성 — 공개 카탈로그 표준(Iceberg REST)을 통한 외부 엔진 · 에이전트의 데이터 읽기
+- 효율 — 관리형 / 직접 운영 비중의 명시 근거
+- 동향 적합성 — 운영 사례, 로드맵 방향, 현행 5.x · 6.0의 지원 종료 예정일
+- 커스터마이징 — 중앙 ID · SSO 연동, 가드레일 예외 필요 여부, 태깅
+- 데이터 정책 — 분류 · 민감정보 식별, 처리 위치, 보존 · 삭제, 데이터 수준 접근 기록(S3 데이터 이벤트)
 
-상한 때문에 버렸지만 위 빈칸을 채우는 것(열어 본 페이지): Transport for NSW 고객 사례(운영 사례 · 이관 — 날짜 없어 D), CloudTrail 로깅 문서(감사 연결 · 접근 기록), VPC 네트워크 설정 문서, Detect PII 문서(민감정보 식별), Iceberg REST 엔드포인트 문서(이관 경로 · 데이터 읽기). 남은 7건이 저마다 혼자 받치는 항목이 있어 「빈 축 우선」 규칙으로는 맞바꿀 자리가 없었다.
+상한 10건에 닿아 넣지 못한 것(열어 본 페이지): Detect PII 문서(https://docs.aws.amazon.com/glue/latest/dg/detect-PII.html — 민감정보 식별). Transport for NSW 고객 사례는 날짜가 없어 D라 넣지 않았다.
 
 ---
 
@@ -214,17 +249,41 @@ Amazon Managed Workflows for Apache Airflow. 상태: GA — 첫 버전 v1.10.12�
 | 전제 조건 | Celery 워커는 태스크 간 격리가 약함. 이 사례에서는 커스텀 오퍼레이터가 워커 디스크에 만든 가상환경이 서로 간섭해, 그대로 옮기려던(rehost) 계획이 구조를 고치는(refactor) 작업으로 바뀜 |
 | 걸리는 평가 축 | 효과 — 처리량, 기존 작업 이관 / 동향 적합성 — 운영 사례 / 비용 — 전환 비용(재구성 부담) |
 
+### 근거 8 — MWAA Serverless: 환경 관리 없이 워크플로 실행, 워크플로마다 IAM 격리
+
+| 항목 | 내용 |
+|---|---|
+| 출처 | Amazon MWAA Introduces Serverless Deployment Option for Apache Airflow Workflows · AWS What's New · https://aws.amazon.com/about-aws/whats-new/2025/11/mwaa-serverless-deployment-apache-airflow-workflows/ |
+| 날짜 | 발행 2025-11-17 · 확인 2026-10-11 · 오래됨 아님 |
+| 등급 | A — Serverless 옵션은 Airflow 환경 관리 부담 없이 인프라를 자동 확장. 태스크 실행 시간만 과금. 워크플로는 YAML이나 Python DAG. 워크플로마다 격리 실행되고 IAM 권한도 따로. Airflow v3.0의 AWS 오퍼레이터 80개 이상 지원. 출시 시점 15개 리전(서울 포함) |
+| 적용 상황 | 상시 환경(스케줄러 · 워커 · 웹서버) 없이 워크플로를 돌릴 때, 실행이 드문 배치 위주 워크로드 |
+| 구성 요소 | MWAA Serverless 워크플로(YAML 또는 Python DAG), 워크플로별 IAM 역할, AWS 오퍼레이터 |
+| 전제 조건 | Airflow v3.0 기준, 지원 오퍼레이터는 AWS 오퍼레이터 80여 개. 그 밖의 오퍼레이터 · 커스텀 플러그인 사용 가능 여부 〔미정〕, 태스크 실행 방식 〔미정〕. 근거 3의 내장 모니터링은 Provisioned만 대상 |
+| 걸리는 평가 축 | 효율 — 관리형 / 직접 운영 비중, 관리할 구성요소 수 / 비용 — 과금 단위 / AI 인프라 적합성 — 권한 전파 |
+
+### 근거 9 — Airflow 3.3.1 지원: Task · Asset State Store, asset 파티셔닝, 재시도 정책 플러그인
+
+| 항목 | 내용 |
+|---|---|
+| 출처 | Amazon MWAA supports Apache Airflow version 3.3.1 · AWS What's New · https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-mwaa-apache-airflow-3-3-1/ |
+| 날짜 | 발행 2026-09-01 · 확인 2026-10-11 · 오래됨 아님 |
+| 등급 | A — 3.3.1 환경에서: 재시도 · 재실행을 거쳐도 태스크 상태 유지(Task · Asset State Store — 커서 추적, 장시간 작업 재접속), asset 파티셔닝 확장, 재시도 정책 플러그인 교체, DAG 실행 · 태스크 인스턴스 일괄 작업, Java · Go Language Task SDK(실험). 새 환경 생성 또는 3.2 이상에서 업그레이드 |
+| 적용 상황 | 재시도 사이에 상태를 이어 가야 하는 장시간 · 증분 처리, 데이터(asset) 단위 의존성 · 일정 |
+| 구성 요소 | Airflow 3.3.1 환경, Task · Asset State Store, asset 파티셔닝, 재시도 정책 플러그인 |
+| 전제 조건 | v3.2 이상이어야 바로 업그레이드, 2.x는 메이저 이관(근거 2). asset 파티셔닝 · 재시도 정책의 세부 동작 〔미정〕. Language Task SDK는 실험 기능 |
+| 걸리는 평가 축 | 효과 — 작업 의존성 · 일정(세부 동작은 〔미정〕) / 동향 적합성 — 릴리스 활동 |
+
 ### 비어 있는 것
 
 - 비용 — 운영 인력, medium 크기 · small · medium 스케줄러 · 웹서버 단가
-- 효과 — 작업 의존성 · 일정, 실시간 처리 여부, 가용성 SLA 수치(서브넷 2개를 다른 AZ에 둔다는 것만 확인), 원천 · 대상 연결(커넥터 · 오퍼레이터 범위)
-- 효율 — 관리할 구성요소 수, 관리형 / 직접 운영 비중
+- 효과 — 실시간 처리 여부, 가용성 SLA 수치(서브넷 2개를 다른 AZ에 둔다는 것만 확인), Provisioned 환경의 원천 · 대상 연결(커넥터 · 오퍼레이터 범위), 작업 의존성 세부 동작
+- 효율 — 관리할 구성요소 수의 구체 수치
 - 동향 적합성 — 종속성(공개 포맷 · 이관 경로)을 다룬 별도 근거, 로드맵 방향
 - 커스터마이징 — SSO(IAM Identity Center) 연동, 태깅, 중앙 로깅 계정 전송, CloudTrail 기록 대상
 - 데이터 정책 — 분류 · 민감정보 식별, 접근 기록(CloudTrail), 보존 · 삭제, 리니지 · 카탈로그 연결
 - AI 인프라 적합성 — 메타데이터 · 스키마 노출. MCP: AWS 공식 MCP 저장소(https://github.com/awslabs/mcp, `src/` 목록 2026-10-11 확인)에 MWAA · Airflow 서버 없음, `aws-dataprocessing-mcp-server`에도 MWAA 언급 없음
 
-상한 때문에 버렸지만 위 빈칸을 채우는 것(열어 본 페이지): MWAA Serverless 출시 What's New(2025-11-17, https://aws.amazon.com/about-aws/whats-new/2025/11/mwaa-serverless-deployment-apache-airflow-workflows/ — 효율의 관리형 비중 · 구성요소 수), Airflow 3.3.1 지원 What's New(2026-09-01, https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-mwaa-apache-airflow-3-3-1/ — 효과의 작업 의존성 · 일정), SageMaker Unified Studio의 MWAA 연결 What's New(2026-07-07).
+넣지 않은 버린 건: CloudWatch 로그 유형 문서 · SageMaker Unified Studio의 MWAA 연결 What's New(2026-07-07) · REST API What's New(2024-10-23)는 새로 채우는 빈칸이 없음.
 
 ---
 
@@ -316,17 +375,29 @@ Amazon Managed Workflows for Apache Airflow. 상태: GA — 첫 버전 v1.10.12�
 | 전제 조건 | 페이로드 256KB 이하 설계, 스케줄 트리거(EventBridge 등) 별도 |
 | 걸리는 평가 축 | 동향 적합성 — 운영 사례 / 효과 — 처리 방식(실시간), 일정(외부 스케줄러 필요), 처리량 · 지연 / 효율 — 관리형 · 서버리스 |
 
+### 근거 8 — 지표 대시보드 출시(계정 · 상태 머신 단위 사용량 · 과금 지표)
+
+| 항목 | 내용 |
+|---|---|
+| 출처 | AWS Step Functions announces a new metrics dashboard · AWS What's New · https://aws.amazon.com/about-aws/whats-new/2025/10/aws-step-functions-metrics-dashboard |
+| 날짜 | 발행 2025-10-30 · 확인 2026-10-11 · 오래됨 아님 |
+| 등급 | A — 콘솔에 지표 대시보드가 추가돼 계정 수준과 상태 머신 수준의 사용량 · 과금 지표를 한곳에서 봄. Standard · Express 모두, ApproximateOpenMapRunCount 같은 기존 지표도 표시. Step Functions가 제공되는 모든 리전 |
+| 적용 상황 | 서비스의 최근 기능 추가 흐름(릴리스 활동) 확인, 사용량 · 과금을 콘솔에서 바로 볼 때 |
+| 구성 요소 | Step Functions 콘솔 지표 대시보드, CloudWatch 지표 |
+| 전제 조건 | Step Functions 콘솔 접근 권한 |
+| 걸리는 평가 축 | 동향 적합성 — 릴리스 활동 / 효율 — 기존 모니터링 연결 |
+
 ### 비어 있는 것
 
 - 비용 — 운영 인력, 전환 비용
 - 효과 — 가용성(SLA · 실행 보장 수치), 기존 작업 이관(다른 오케스트레이터 정의를 ASL로 옮기는 경로)
 - 효율 — 업그레이드 · 패치 부담을 직접 다룬 근거, X-Ray 추적 연동(문서 미열람)
-- 동향 적합성 — GA 명시 근거, 지원 종료 계획, 릴리스 활동, 로드맵 방향
+- 동향 적합성 — GA 명시 근거, 지원 종료 계획, 로드맵 방향
 - 커스터마이징 — 중앙 ID · SSO 연동, 가드레일 예외 필요 여부, 태깅
 - 데이터 정책 — 분류 · 민감정보 식별, 반출 경로 통제 · 처리 위치, 리니지 · 카탈로그 연결
 - AI 인프라 적합성 — 에이전트가 데이터를 직접 읽는 인터페이스(오케스트레이터라 해당 여부 〔미정〕)
 
-상한 때문에 버렸지만 위 빈칸을 채우는 것(열어 본 페이지): What's New 2025-10-30 지표 대시보드 · 2025-09-18 Distributed Map 확장(동향 — 릴리스 활동). 「빈 축 우선」으로 워크플로 유형 비교 문서를 빼고 VPC 엔드포인트 문서를 넣었다.
+넣지 않은 버린 건(새로 채우는 빈칸 없음): 워크플로 유형 비교 문서, What's New 2025-09-18 Distributed Map 확장, CloudWatch Logs 로깅 문서, AWS Compute Blog CMK 글(2024-08-27, 오래됨). CloudThat 사례는 날짜가 없어 D.
 
 ---
 
@@ -418,17 +489,40 @@ Amazon Managed Workflows for Apache Airflow. 상태: GA — 첫 버전 v1.10.12�
 | 전제 조건 | 에이전트에서 Airflow API까지 네트워크 도달, 에이전트용 계정 권한 범위(근거 5의 토큰 한계). 관리형 전용 기능 의존 여부 〔미정〕 |
 | 걸리는 평가 축 | AI 인프라 적합성 — 공개 표준 연계(MCP), 작업 호출 · 결과 수신, 데이터 읽기 인터페이스 / 동향 적합성 — 종속성(제3자 벤더 저장소) |
 
+### 근거 8 — 메트릭 · 원격 로그 연결
+
+| 항목 | 내용 |
+|---|---|
+| 출처 | Metrics Configuration · https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/logging-monitoring/metrics.html ; Logging for Tasks · https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/logging-monitoring/logging-tasks.html (Apache Airflow 공식 문서) |
+| 날짜 | 상시 갱신 — 확인 2026-10-11 기준 (문서 버전 3.3.2) |
+| 등급 | A — 메트릭은 StatsD와 OpenTelemetry로 내보냄(`[metrics]`의 statsd_* · otel_* 키, 허용 · 차단 목록). 타이밍 메트릭은 OTel 지수 히스토그램이라 Prometheus로 받으려면 native histogram을 켜고 OTel Collector 0.115.0 이상 필요. 태스크 로그는 원격 저장소로 — 블롭형(S3 · GCS · WASB · HDFS · OSS)과 스트리밍형(Elasticsearch · AWS CloudWatch · GCP 로깅), `remote_logging` · `remote_base_log_folder`로 설정, `delete_local_logs`로 업로드 뒤 로컬 삭제 |
+| 적용 상황 | 직접 운영 Airflow를 조직이 이미 쓰는 모니터링 · 중앙 로깅에 붙이는 경우 |
+| 구성 요소 | StatsD 수신기 또는 OTel Collector, (선택) Prometheus, 원격 로그 저장소(S3 · CloudWatch 등), 로그 핸들러 프로바이더 |
+| 전제 조건 | 받는 쪽 모니터링 · 로그 시스템을 따로 운영하거나 연결. 감사 로그(근거 5)를 중앙 로깅으로 보내는 경로 〔미정〕 |
+| 걸리는 평가 축 | 효율 — 기존 모니터링 · 로깅 연결 / 커스터마이징 — 중앙 로깅 |
+
+### 근거 9 — 기업 자체 운영 사례: Kubernetes에 직접 올리고 클러스터 팀에 의존 (오래됨)
+
+| 항목 | 내용 |
+|---|---|
+| 출처 | Self-hosted vs. managed Apache Airflow (Ariel Sosnovsky, Senior ML Engineer) · Sumo Logic 기술 블로그 · https://www.sumologic.com/blog/self-hosted-vs-managed-apache-airflow |
+| 날짜 | 발행 2022-11-07 · 확인 2026-10-11 · **「오래됨」** — 운영 구조 설명의 근거로만, 동향 근거로는 쓰지 않음 |
+| 등급 | B — Airflow를 Kubernetes에 직접 올려 운영. 비용 항목은 RDS · Kubernetes 호스팅(금액 미공개). Kubernetes 클러스터는 별도 내부 팀이 관리해 업그레이드 · 비용 추적이 그 팀에 달림. 워커 용량은 할당 자원에 묶임. 직접 운영 이유로 조직의 기존 모니터링 · 알림 재사용, git에서 DAG 직접 동기화(롤백 용이)를 듦. 2.x 이관 때 커스텀 오퍼레이터가 깨지고 DB 버전이 맞지 않는 문제. 공식 차트가 아닌 커뮤니티 Helm 차트(airflow-helm) 사용 |
+| 적용 상황 | Kubernetes 운영 조직이 따로 있고 그 위에 Airflow를 얹어 직접 운영하는 경우 |
+| 구성 요소 | Kubernetes 클러스터(별도 팀), RDS 메타DB, 커뮤니티 Helm 차트, git 기반 DAG 동기화, 조직 공통 모니터링 · 알림 |
+| 전제 조건 | Kubernetes를 운영하는 별도 인력 · 팀. 메이저 업그레이드 때 커스텀 코드와 DB 호환성 점검 |
+| 걸리는 평가 축 | 비용 — 운영 인력(질적, 수치 없음) / 효과 — 기존 작업 이관(메이저 업그레이드 때 깨진 항목) / 효율 — 기존 모니터링 연결 |
+
 ### 비어 있는 것
 
-- 비용 — 운영 인력: 수치 근거 없음
-- 효과 — 처리량 · 지연 수치, 기존 작업 이관 절차
-- 효율 — 기존 모니터링 · 로깅 · 감사 연결(근거는 있으나 상한 때문에 빠짐 — 아래)
+- 비용 — 운영 인력의 수치(인원 · 인건비). 질적 근거는 근거 9 하나이고 「오래됨」
+- 효과 — 처리량 · 지연 수치, Airflow 3로 이관한 최신 공개 사례(근거 9는 2022년 2.x 이관)
 - 동향 적합성 — **직접 운영을 명시한 최근(2024-10-11 이후) 공개 기업 운영 사례 0건.** Airflow Summit의 Uber · OpenAI 세션 페이지는 날짜가 없고(D) 직접 운영인지도 적혀 있지 않음
 - 커스터마이징 — 계정 · 조직 배치, 태깅, 가드레일 예외
-- 데이터 정책 — 분류 · 민감정보 식별, 반출 경로 통제 · 처리 위치(마스킹 한계만 근거 5에 있음)
+- 데이터 정책 — 분류 · 민감정보 식별, 반출 경로 통제 · 처리 위치(마스킹 한계만 근거 5), 감사 로그를 중앙 로깅으로 보내는 경로
 - AI 인프라 적합성 — Apache 재단 공식 MCP 서버 없음
 
-상한 때문에 버렸지만 위 빈칸을 채우는 것(열어 본 페이지): 메트릭 문서(https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/logging-monitoring/metrics.html — StatsD · OpenTelemetry), 원격 로그 문서(https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/logging-monitoring/logging-tasks.html — S3 · CloudWatch 등). Sumo Logic 기술 블로그(2022-11-07, 오래됨)는 운영 인력의 질적 근거.
+넣지 않은 버린 건: 아키텍처 개요 문서(새 빈칸 없음), Airflow Summit 2025 세션 페이지 3건(날짜 없음 D), Summit 슬라이드 PDF(본문 읽기 불가).
 
 ---
 
@@ -520,15 +614,41 @@ ELT 변환 계층. 종류: 직접 운영(dbt Core v1 · dbt-oss v2를 자체 컴
 | 전제 조건 | 컨테이너 실행 환경과 오케스트레이터(Step Functions)를 직접 구성. 원천 측이 완료 파일로 전송 완료를 알려야 함 |
 | 걸리는 평가 축 | 효과 — 처리 방식(이벤트 기반 일괄), 원천 · 대상 연결(S3 → Redshift Serverless), 작업 의존성 · 일정 / 효율 — 관리할 구성요소 수, 기존 모니터링 · 로깅 연결(CloudWatch) / 동향 적합성 — 운영 사례 / 비용 — 인프라 사용료(서버리스 종량제) / 커스터마이징 — workgroup 배치, IAM |
 
+### 근거 8 — dbt platform의 AWS PrivateLink 사설 연결
+
+| 항목 | 내용 |
+|---|---|
+| 출처 | About private connectivity(PrivateLink) · dbt Labs 문서 · https://docs.getdbt.com/docs/cloud/secure/about-privatelink |
+| 날짜 | 갱신 2026-07-23 · 확인 2026-10-11 · 오래됨 아님 |
+| 등급 | A — AWS PrivateLink로 dbt 환경과 AWS 데이터 플랫폼을 연결하면 트래픽이 공용 인터넷을 지나지 않음. dbt와 데이터 플랫폼이 같은 클라우드에 있어야 함. Enterprise+와 Virtual Private에서만, 북미 · 유럽 · 아시아 대부분 리전 지원. 사설 엔드포인트 설정에는 Extended Attributes 사용(환경 변수 불가). Admin API v3로 엔드포인트 조회 · 생성 · 수정 · 삭제. 연결 가능한 AWS 서비스 목록은 이 페이지에 없음 〔미정〕 |
+| 적용 상황 | 관리형 dbt platform이 사설망 웨어하우스에 붙고 데이터 경로를 공용 인터넷에서 떼야 할 때 |
+| 구성 요소 | dbt platform(Enterprise+ 또는 Virtual Private), AWS PrivateLink 엔드포인트, Extended Attributes, Admin API v3 |
+| 전제 조건 | Enterprise+ 이상(영업 문의), 데이터 플랫폼이 AWS에 있을 것, 리전의 PrivateLink 지원 |
+| 걸리는 평가 축 | 데이터 정책 — 반출 경로 통제 / 커스터마이징 — 네트워크(사설 연결) |
+
+### 근거 9 — dbt v1에서 v2로 옮기는 공식 절차
+
+| 항목 | 내용 |
+|---|---|
+| 출처 | dbt Core v2 is here · dbt Labs 공식 블로그(Joel Labes, Grace Goheen) · https://docs.getdbt.com/blog/dbt-core-v2-is-here |
+| 날짜 | 발행 2026-06-01 · 확인 2026-10-11 · 오래됨 아님 |
+| 등급 | A — 공식 이관 절차 4단계: ① v1.12(또는 dbt platform Latest track)로 올림 ② dbt-autofix 패키지와 migrating-dbt-core-to-v2 에이전트 스킬로 자동 수정 ③ `dbt parse --use-v2-parser`로 파싱 호환성 확인 ④ v2 설치. v1은 PyPI · GitHub에 계속 남음. 당장 옮기지 않아도 되지만 앞으로 일부 기능은 업그레이드 필요. 글 발행 시점 v2는 알파(GA는 근거 2) |
+| 적용 상황 | dbt v1으로 운영 중인 변환 작업을 v2 엔진으로 옮길 때 |
+| 구성 요소 | dbt v1.12, dbt-autofix, migrating-dbt-core-to-v2 에이전트 스킬, v2 파서 |
+| 전제 조건 | v1.12 동작 변경과 파싱 호환성 점검 통과. dbt가 아닌 도구에서 옮겨 오는 경로는 없음 |
+| 걸리는 평가 축 | 효과 — 기존 작업 이관(v1 → v2) / 비용 — 전환 비용(자동 수정 도구가 있다는 사실까지, 공수 수치 없음) |
+
 ### 비어 있는 것
 
-- 비용 — Starter 초과 모델 단가, Enterprise 단가(별도 견적), 운영 인력 규모, v1 → v2 · Core → platform 전환 비용 수치
-- 효과 — 실시간(스트리밍) 처리 지원 여부, dbt platform 가용성 SLA 수치, 다른 변환 도구에서 옮겨 올 때의 이관 경로
+- 비용 — Starter 초과 모델 단가, Enterprise 단가(별도 견적), 운영 인력 규모, 전환 비용 수치
+- 효과 — 실시간(스트리밍) 처리 지원 여부, dbt platform 가용성 SLA 수치, dbt가 아닌 변환 도구에서 옮겨 오는 이관 경로
 - 효율 — dbt platform 로그의 CloudWatch · CloudTrail 직접 연동(API 경유만 확인)
-- 커스터마이징 — 랜딩존 안에서 어느 AWS 계정에 둘지, 가드레일(SCP) 예외 필요 여부, 태깅 · 중앙 로깅 연동. Redshift IAM Identity Center 인증이 dbt platform에서 아직 안 된다는 세부는 상한 때문에 빠짐
-- 데이터 정책 — 분류 · 민감정보 식별, 반출 경로 통제(PrivateLink 문서가 일부 채울 수 있으나 상한 때문에 빠짐), 보존 · 삭제(감사 로그 보존 외)
+- 커스터마이징 — 랜딩존 안에서 어느 AWS 계정에 둘지, 가드레일(SCP) 예외 필요 여부, 태깅 · 중앙 로깅 연동
+- 데이터 정책 — 분류 · 민감정보 식별, 보존 · 삭제(감사 로그 보존 외), PrivateLink로 연결할 수 있는 AWS 서비스 목록
 - AI 인프라 적합성 — MCP 서버의 GA 여부, 사용자 권한이 에이전트까지 이어지는 방식
-- 동향 적합성 — dbt Product Licensing Agreement 세부 조건(약관 원문 미확인). Fivetran과의 합병 완료(2026-06-01 보도자료)는 상한 때문에 빠짐
+- 동향 적합성 — dbt Product Licensing Agreement 세부 조건(약관 원문 미확인)
+
+넣지 않은 버린 건(새로 채우는 빈칸 없음): Redshift · Athena · Glue 어댑터 문서(Glue 어댑터는 dbt Labs 지원 대상이 아닌 커뮤니티 플러그인), Fivetran 합병 완료 보도자료(2026-06-01), 컬럼 단위 리니지 문서, dbt Summit 2026 프리뷰 블로그(예고 · 자기 주장 D).
 
 ---
 
@@ -620,13 +740,37 @@ GCP 관리형 Apache Airflow(현 명칭 Managed Service for Apache Airflow) — 
 | 전제 조건 | DAG와 의존성을 Gen 3 패키지 구성에 맞출 수 있어야 함(상세 없음). 네트워크 구성은 다루지 않음 |
 | 걸리는 평가 축 | 효과 — 기존 작업 이관, 지연 / 동향 적합성 — 운영 사례 / 효율 — 업그레이드 · 패치 부담 |
 
+### 근거 8 — Airflow 3.1 GA 스케줄링 기능과 서비스 간 배포 프레임워크
+
+| 항목 | 내용 |
+|---|---|
+| 출처 | Managed Apache Airflow: Scaling Data & AI Workloads · Google Cloud Blog(Piotr Wieczorek, Rafal Biegacz — Google) · https://cloud.google.com/blog/products/data-analytics/managed-apache-airflow-scaling-data-and-ai-workloads |
+| 날짜 | 발행 2026-05-05 · 확인 2026-10-11 · 오래됨 아님 |
+| 등급 | A — 벤더 공식 블로그의 기능 사실. Airflow 3.1 GA: 실행 계층 분리, DAG 버전 관리(구조 · 실행 이력 보존), 스케줄러가 관리하는 백필, asset 기반 · 외부 이벤트(예: 메시지 큐 도착) 트리거, Human-in-the-Loop 일시정지, 시간 기준 deadline alert. YAML로 정의하는 오케스트레이션 파이프라인, 서비스 간 Deployment Automation Framework 번들(예시 dbt · Spark · DTS), GitHub Actions로 검증 · 배포. MTTR 단축 같은 효과 주장은 수치 없는 벤더 주장이라 쓰지 않음. 이 글의 MCP Public Preview 표기는 이후 GA(근거 6)로 바뀌어 쓰지 않음 |
+| 적용 상황 | 데이터 · 이벤트 기반 트리거, 백필, 마감 경보가 필요한 흐름. dbt · Spark 같은 처리 서비스를 묶어 한 단위로 배포 |
+| 구성 요소 | Airflow 3.1, asset · 이벤트 트리거, YAML 파이프라인, Deployment Automation Framework, GitHub Actions |
+| 전제 조건 | Gen 3 환경에서 Airflow 3.1 이상. 스트리밍 · 실시간 처리 설명은 없음(이벤트 트리거까지). 앞으로의 계획은 밝히지 않음 |
+| 걸리는 평가 축 | 효과 — 작업 의존성 · 일정, 처리 방식(이벤트 트리거까지), 원천 · 대상 연결(번들 예시까지) |
+
+### 근거 9 — Gen 3 과금 단위: DCU-시간 + DB 스토리지 GiB-시간
+
+| 항목 | 내용 |
+|---|---|
+| 출처 | Managed Service for Apache Airflow 가격 책정 · Google Cloud · https://cloud.google.com/products/managed-service-for-apache-airflow/pricing (https://cloud.google.com/composer/pricing 에서 넘어감, 내장 브라우저로 열어 확인) |
+| 날짜 | 상시 갱신 — 확인 2026-10-11 기준 |
+| 등급 | A — Gen 3는 실제 실행 기간만 청구. SKU는 ① 표준 milliDCU-시간 — Iowa(us-central1) 기준 1,000 milliDCU-시간(= 1 DCU-시간)당 $0.06, 1년 약정 $0.054 · 3년 약정 $0.048 ② DB 스토리지 GiB-시간당 $0.000232877(Cloud SQL 최소 10GiB, 늘어나면 줄지 않음) ③ 네트워크 데이터 전송은 VPC 네트워크 요금을 따름. DCU는 Airflow 작업자 · 스케줄러 · DAG 프로세서 · 트리거 · 웹 서버의 vCPU · 메모리 · 스토리지와 환경 크기(관리형 인프라)를 합친 단위이고, 작업자 자동 확장을 따라 변함. 고복원성 모드는 단가는 같고 DCU 소비가 늘며, DB 스토리지 비용은 약 2배. 별도 비용: 환경의 Cloud Storage 버킷(저장 · 작업 요금), 스냅샷, Cloud Monitoring, CMEK 사용 시 KMS. Gen 2는 CPU · 메모리 · 스토리지 SKU + 환경 크기 요금(소형 $0.35/h 등)으로 과금 모델이 다름 |
+| 적용 상황 | Gen 3 환경의 비용 산정, MWAA(인스턴스 시간)와 과금 단위 비교 |
+| 구성 요소 | milliDCU-시간 SKU, DB 스토리지 SKU, 네트워크 전송 SKU, 약정 사용 할인(Gen 3만) |
+| 전제 조건 | 페이지 표는 us-central1 단가. 서울 등 다른 리전 단가 〔미정〕. DCU 사용량은 작업자 수 · 환경 크기에 따라 달라 산식에 추정치가 필요 |
+| 걸리는 평가 축 | 비용 — 과금 단위 · 단가, 인프라 사용료 |
+
 ### 비어 있는 것
 
-- 비용 — **과금 단위 · 단가 전부.** 공식 요금 페이지(https://cloud.google.com/composer/pricing)가 열었을 때 본문이 잘려 확인하지 못함 → 〔미정〕. 전환 비용(MWAA → Composer)도 〔미정〕. 비용 축은 A · B 근거가 없다
-- 효과 — 처리 방식(일괄 · 실시간), 원천 · 대상 연결(커넥터 · 오퍼레이터 범위), 작업 의존성 · 일정
+- 비용 — 서울 등 us-central1 외 리전 단가, 전환 비용(MWAA → Composer)
+- 효과 — 스트리밍 · 실시간 처리 지원 여부, 커넥터 · 오퍼레이터 지원 범위
 - 동향 적합성 — 로드맵 방향
 - 커스터마이징 — 가드레일 예외 필요 여부, 태깅 · 중앙 로깅
 - 데이터 정책 — 분류 · 민감정보 식별, 보존 · 삭제, 접근 기록(감사 로그 세부)
 - AI 인프라 적합성 — 스키마 노출(리니지 이벤트 외)
 
-상한 때문에 버렸지만 위 빈칸을 채우는 것(열어 본 페이지): Managed Apache Airflow 블로그(2026-05-05 — 로드맵 방향, asset · event 기반 스케줄링). 「빈 축 우선」으로 Scale environments 문서를 빼고 VPC 연결 문서를 넣었다.
+넣지 않은 버린 건(새로 채우는 빈칸 없음): Scale environments · Optimize environments · Access control · Migrate to Gen 3 · composer-versions 페이지.

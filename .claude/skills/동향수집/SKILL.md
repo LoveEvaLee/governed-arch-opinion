@@ -37,11 +37,38 @@ AWS Control Tower 랜딩존 기준 11개. 한 번에 영역 하나만 한다(dif
 
 ## 수집 범위 — 2026-10-11 유경 결정
 
-| 수집함 | 등급 |
-|---|---|
-| AWS 공식 — 서비스 문서, Architecture Center, What's New, AWS 공식 블로그 | A (고객 사례 글은 B) |
-| 타사 · 오픈소스 공식 — Azure · GCP Architecture Center와 서비스 문서, 오픈소스 프로젝트 공식 문서 · 저장소 릴리스 | A |
-| 공개 기업 사례 — 컨퍼런스 세션(re:Invent · Summit 등), 기업 기술 블로그의 도입 · 운영 사례 | B |
+주소는 3-1 첫 실행 때 실제로 열어 확인한다. 확인되지 않은 주소는 이 표에서 고친다.
+
+**A — AWS 공식**
+
+| 출처 | 주소 | 쓰는 곳 |
+|---|---|---|
+| 서비스 문서 | docs.aws.amazon.com | 기능 · 한도 · 통합 방식 |
+| 요금 페이지 | aws.amazon.com/<서비스>/pricing | 비용 산식 |
+| Architecture Center | aws.amazon.com/architecture | 레퍼런스 아키텍처 |
+| Prescriptive Guidance | docs.aws.amazon.com/prescriptive-guidance | 이관 · 패턴 가이드 |
+| Well-Architected (렌즈 포함) | docs.aws.amazon.com/wellarchitected | 설계 원칙 |
+| What's New | aws.amazon.com/new | 출시 · GA · 지원 종료 |
+| AWS 공식 블로그 (한국 블로그 포함) | aws.amazon.com/blogs · aws.amazon.com/ko/blogs | 기능 해설 A, 고객 사례 글 B |
+
+**A — 타사 · 오픈소스 · 벤더 공식**
+
+| 출처 | 주소 | 쓰는 곳 |
+|---|---|---|
+| Azure Architecture Center | learn.microsoft.com/azure/architecture | 타사 비교 |
+| Google Cloud Architecture Center | cloud.google.com/architecture | 타사 비교 |
+| 오픈소스 프로젝트 공식 문서 | 프로젝트마다 | 기능 · 운영 방식 |
+| 오픈소스 공식 저장소 | GitHub 등 — 릴리스 · 기여자 · 이슈 | 동향 적합성 (활동 · 성숙도) |
+| 재단 프로젝트 페이지 | cncf.io · apache.org | 성숙도 단계 |
+| 벤더 공식 문서 · 블로그 | 예: Databricks · Snowflake · Astronomer | 자기 제품 기능 · 요금 A, 고객 사례 B, 자기 우월 비교 D |
+
+**B — 공개 기업 사례**
+
+| 출처 | 예 | 비고 |
+|---|---|---|
+| AWS · 벤더 고객 사례 | aws.amazon.com/solutions/case-studies 등 | 사업자가 고른 성공 사례 — 비고에 「사업자 선정 사례」 표시 |
+| 컨퍼런스 세션 | re:Invent · AWS Summit · 오픈소스 컨퍼런스 · 국내 기업 컨퍼런스 | 발표자 · 날짜 확인 가능한 것만 |
+| 기업 기술 블로그 | **회사명과 작성자 · 날짜가 공개된 곳이면 모두** (2026-10-11 유경 결정) | 도입 · 운영 사례 글만. 회사 홍보 · 채용 글 제외 |
 
 **수집하지 않음** — 개인 블로그, Medium 같은 플랫폼의 개인 글, 커뮤니티(Reddit 등), 출처 · 날짜 불명 자료. 그래서 refs에는 C · D 출처가 원칙적으로 없다. 수집 범위 안의 자료라도 주장 단위 규칙으로 D가 되는 경우(벤더 자기 우월 주장)는 있다.
 

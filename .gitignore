@@ -53,3 +53,7 @@ Thumbs.db
 # ── Node 의존성 ──
 # pi 로컬 설치물(package.json으로 재설치 가능)
 node_modules/
+
+# ── Python 바이트코드 캐시 ──
+# 스킬 스크립트를 로컬에서 실행하면 생긴다(run_daily는 PYTHONDONTWRITEBYTECODE로 방지)
+__pycache__/

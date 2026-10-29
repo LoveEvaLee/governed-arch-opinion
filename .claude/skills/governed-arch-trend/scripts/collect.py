@@ -1,5 +1,6 @@
-"""config/sources.json의 RSS·Atom 피드와 GitHub 릴리스를 모아 _data/collected/{날짜}.json에 쓴다.
+"""config/sources.json의 RSS·Atom 피드, GitHub 릴리스, 자료 페이지(doc_pages)를 모아 _data/collected/{날짜}.json에 쓴다.
 
+doc_pages는 정적 HTML 페이지의 PDF 링크를 항목으로 뽑는다(JS 렌더링 페이지는 안 됨).
 소스 하나가 실패해도 나머지는 계속한다. 이미 본 항목은 _data/seen.json으로 거른다.
 사용법: collect.py [--days N] [--date YYYY-MM-DD]
 """
@@ -11,6 +12,7 @@ import html
 import json
 import re
 import time
+import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 
@@ -95,6 +97,22 @@ def gh_items(src):
     return out
 
 
+def doc_items(src):
+    raw = get(src["url"]).decode("utf-8", "ignore")
+    out = []
+    for m in re.finditer(r'<a[^>]+href=[\'"]([^\'"]+\.pdf(?:[?#][^\'"]*)?)[\'"][^>]*>(.*?)</a>', raw, re.I | re.S):
+        href = urllib.parse.urljoin(src["url"], m.group(1))
+        title = clean(m.group(2), 300) or urllib.parse.unquote(href.rsplit("/", 1)[-1])
+        out.append({
+            "title": title,
+            "url": href,
+            "published": None,  # 목록 페이지에는 날짜가 없다 — 큐레이션 날짜 규칙(「상시 갱신」)을 따른다
+            "summary": f"자료(PDF) — {src['name']} 페이지에서 발견",
+            "is_doc": True,
+        })
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--days", type=int, default=2)
@@ -104,10 +122,11 @@ def main():
     cfg = load(SKILL / "config" / "sources.json")
     seen = set(load(DATA / "seen.json", []))
     items, status = [], {}
-    jobs = [(s, "rss") for s in cfg["rss"]] + [(s, "gh") for s in cfg["github_releases"]]
+    jobs = ([(s, "rss") for s in cfg["rss"]] + [(s, "gh") for s in cfg["github_releases"]]
+            + [(s, "doc") for s in cfg.get("doc_pages", [])])
     for src, kind in jobs:
         try:
-            got = gh_items(src) if kind == "gh" else rss_items(src, get(src["url"]))
+            got = gh_items(src) if kind == "gh" else doc_items(src) if kind == "doc" else rss_items(src, get(src["url"]))
         except Exception as e:
             status[src["id"]] = f"실패: {type(e).__name__}: {e}"[:200]
             continue

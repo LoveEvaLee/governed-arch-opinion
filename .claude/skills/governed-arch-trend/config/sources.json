@@ -1,128 +1,130 @@
 {
-  "_comment": "governed-arch-trend 수집 소스. 등급은 ① 동향수집 SKILL.md 「수집 범위」와 같다. 피드 주소는 2026-10-11에 열어 확인. 추가·삭제는 이 파일만 고친다.",
-  "rss": [
-    {
-      "id": "aws-whats-new",
-      "name": "AWS What's New",
-      "grade": "A",
-      "url": "https://aws.amazon.com/about-aws/whats-new/recent/feed/"
-    },
-    {
-      "id": "aws-big-data",
-      "name": "AWS Big Data Blog",
-      "grade": "A",
-      "url": "https://aws.amazon.com/blogs/big-data/feed/"
-    },
-    {
-      "id": "aws-architecture",
-      "name": "AWS Architecture Blog",
-      "grade": "A",
-      "url": "https://aws.amazon.com/blogs/architecture/feed/"
-    },
-    {
-      "id": "aws-ko-tech",
-      "name": "AWS 기술 블로그(한국)",
-      "grade": "A",
-      "url": "https://aws.amazon.com/ko/blogs/tech/feed/"
-    },
-    {
-      "id": "gcp-composer-rn",
-      "name": "Cloud Composer 릴리스 노트",
-      "grade": "A",
-      "url": "https://cloud.google.com/feeds/composer-release-notes.xml"
-    },
-    {
-      "id": "dbt-blog",
-      "name": "dbt Labs 블로그",
-      "grade": "A",
-      "url": "https://docs.getdbt.com/blog/rss.xml"
-    },
-    {
-      "id": "astronomer-blog",
-      "name": "Astronomer 블로그",
-      "grade": "A",
-      "url": "https://www.astronomer.io/blog/rss.xml"
-    },
-    {
-      "id": "databricks-blog",
-      "name": "Databricks 블로그",
-      "grade": "A",
-      "url": "https://www.databricks.com/feed"
-    },
-    {
-      "id": "toss-tech",
-      "name": "토스 기술 블로그",
-      "grade": "B",
-      "url": "https://toss.tech/rss.xml"
-    },
-    {
-      "id": "woowahan",
-      "name": "우아한형제들 기술 블로그",
-      "grade": "B",
-      "url": "https://techblog.woowahan.com/feed/"
-    },
-    {
-      "id": "kakao-tech",
-      "name": "카카오 기술 블로그",
-      "grade": "B",
-      "url": "https://tech.kakao.com/feed/"
-    },
-    {
-      "id": "naver-d2",
-      "name": "네이버 D2",
-      "grade": "B",
-      "url": "https://d2.naver.com/d2.atom"
-    },
-    {
-      "id": "netflix-tech",
-      "name": "Netflix Tech Blog",
-      "grade": "B",
-      "url": "https://netflixtechblog.com/feed"
-    },
-    {
-      "id": "airbnb-eng",
-      "name": "Airbnb Engineering",
-      "grade": "B",
-      "url": "https://medium.com/feed/airbnb-engineering"
-    },
-    {
-      "id": "aws-ml-blog",
-      "name": "AWS Machine Learning Blog",
-      "grade": "A",
-      "url": "https://aws.amazon.com/blogs/machine-learning/feed/"
-    }
-  ],
-  "github_releases": [
-    {
-      "id": "gh-airflow",
-      "name": "apache/airflow 릴리스",
-      "grade": "A",
-      "repo": "apache/airflow"
-    },
-    {
-      "id": "gh-dbt-core",
-      "name": "dbt-labs/dbt-core 릴리스",
-      "grade": "A",
-      "repo": "dbt-labs/dbt-core"
-    },
-    {
-      "id": "gh-langgraph",
-      "name": "langchain-ai/langgraph 릴리스",
-      "grade": "A",
-      "repo": "langchain-ai/langgraph"
-    },
-    {
-      "id": "gh-litellm",
-      "name": "BerriAI/litellm 릴리스",
-      "grade": "A",
-      "repo": "BerriAI/litellm"
-    },
-    {
-      "id": "gh-vllm",
-      "name": "vllm-project/vllm 릴리스",
-      "grade": "A",
-      "repo": "vllm-project/vllm"
-    }
-  ],
-  "_grade_note": "벤더 블로그(dbt·Astronomer·Databricks)는 출처가 A여도 자기 제품이 낫다는 비교 주장은 큐레이션에서 D로 매긴다. B 블로그는 도입·운영 사례 글만 남긴다."
+ "_comment": "governed-arch-trend 수집 소스. 등급은 ① 동향수집 SKILL.md 「수집 범위」와 같다. 피드 주소는 2026-10-11에 열어 확인. 추가·삭제는 이 파일만 고친다.",
+ "rss": [
+  {
+   "id": "aws-whats-new",
+   "name": "AWS What's New",
+   "grade": "A",
+   "url": "https://aws.amazon.com/about-aws/whats-new/recent/feed/"
+  },
+  {
+   "id": "aws-big-data",
+   "name": "AWS Big Data Blog",
+   "grade": "A",
+   "url": "https://aws.amazon.com/blogs/big-data/feed/"
+  },
+  {
+   "id": "aws-architecture",
+   "name": "AWS Architecture Blog",
+   "grade": "A",
+   "url": "https://aws.amazon.com/blogs/architecture/feed/"
+  },
+  {
+   "id": "aws-ko-tech",
+   "name": "AWS 기술 블로그(한국)",
+   "grade": "A",
+   "url": "https://aws.amazon.com/ko/blogs/tech/feed/"
+  },
+  {
+   "id": "gcp-composer-rn",
+   "name": "Cloud Composer 릴리스 노트",
+   "grade": "A",
+   "url": "https://cloud.google.com/feeds/composer-release-notes.xml"
+  },
+  {
+   "id": "dbt-blog",
+   "name": "dbt Labs 블로그",
+   "grade": "A",
+   "url": "https://docs.getdbt.com/blog/rss.xml"
+  },
+  {
+   "id": "astronomer-blog",
+   "name": "Astronomer 블로그",
+   "grade": "A",
+   "url": "https://www.astronomer.io/blog/rss.xml"
+  },
+  {
+   "id": "databricks-blog",
+   "name": "Databricks 블로그",
+   "grade": "A",
+   "url": "https://www.databricks.com/feed"
+  },
+  {
+   "id": "toss-tech",
+   "name": "토스 기술 블로그",
+   "grade": "B",
+   "url": "https://toss.tech/rss.xml"
+  },
+  {
+   "id": "woowahan",
+   "name": "우아한형제들 기술 블로그",
+   "grade": "B",
+   "url": "https://techblog.woowahan.com/feed/"
+  },
+  {
+   "id": "kakao-tech",
+   "name": "카카오 기술 블로그",
+   "grade": "B",
+   "url": "https://tech.kakao.com/feed/"
+  },
+  {
+   "id": "naver-d2",
+   "name": "네이버 D2",
+   "grade": "B",
+   "url": "https://d2.naver.com/d2.atom"
+  },
+  {
+   "id": "netflix-tech",
+   "name": "Netflix Tech Blog",
+   "grade": "B",
+   "url": "https://netflixtechblog.com/feed"
+  },
+  {
+   "id": "airbnb-eng",
+   "name": "Airbnb Engineering",
+   "grade": "B",
+   "url": "https://medium.com/feed/airbnb-engineering"
+  },
+  {
+   "id": "aws-ml-blog",
+   "name": "AWS Machine Learning Blog",
+   "grade": "A",
+   "url": "https://aws.amazon.com/blogs/machine-learning/feed/"
+  }
+ ],
+ "github_releases": [
+  {
+   "id": "gh-airflow",
+   "name": "apache/airflow 릴리스",
+   "grade": "A",
+   "repo": "apache/airflow"
+  },
+  {
+   "id": "gh-dbt-core",
+   "name": "dbt-labs/dbt-core 릴리스",
+   "grade": "A",
+   "repo": "dbt-labs/dbt-core"
+  },
+  {
+   "id": "gh-langgraph",
+   "name": "langchain-ai/langgraph 릴리스",
+   "grade": "A",
+   "repo": "langchain-ai/langgraph"
+  },
+  {
+   "id": "gh-litellm",
+   "name": "BerriAI/litellm 릴리스",
+   "grade": "A",
+   "repo": "BerriAI/litellm"
+  },
+  {
+   "id": "gh-vllm",
+   "name": "vllm-project/vllm 릴리스",
+   "grade": "A",
+   "repo": "vllm-project/vllm"
+  }
+ ],
+ "_grade_note": "벤더 블로그(dbt·Astronomer·Databricks)는 출처가 A여도 자기 제품이 낫다는 비교 주장은 큐레이션에서 D로 매긴다. B 블로그는 도입·운영 사례 글만 남긴다.",
+ "_doc_note": "doc_pages: 정적 HTML 자료 페이지의 PDF 링크를 항목으로 수집(JS 렌더링 페이지 불가 — AWS 백서 목록·CNCF reports는 2026-10-29 확인 결과 JS라 등록 못 함). 백서류 PDF는 주로 피드 글 본문에서 자동 회수된다(render_queue). 정적 페이지를 찾으면 여기에 {id,name,grade,url}로 추가.",
+ "doc_pages": []
 }

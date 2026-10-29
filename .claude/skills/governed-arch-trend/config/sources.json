@@ -1,5 +1,5 @@
 {
- "_comment": "governed-arch-trend 수집 소스. 등급은 ① 동향수집 SKILL.md 「수집 범위」와 같다. 피드 주소는 2026-10-11에 열어 확인. 추가·삭제는 이 파일만 고친다.",
+ "_comment": "governed-arch-trend 수집 소스. 등급은 ① 동향수집 SKILL.md 「수집 범위」와 같다. 피드 주소는 2026-10-11에 열어 확인(GCP 4·Palantir·Gartner는 2026-10-29 추가 확인). 추가·삭제는 이 파일만 고친다.",
  "rss": [
   {
    "id": "aws-whats-new",
@@ -90,6 +90,42 @@
    "name": "AWS Machine Learning Blog",
    "grade": "A",
    "url": "https://aws.amazon.com/blogs/machine-learning/feed/"
+  },
+  {
+   "id": "gcp-data-analytics",
+   "name": "Google Cloud Blog — Data Analytics",
+   "grade": "A",
+   "url": "https://cloudblog.withgoogle.com/products/data-analytics/rss/"
+  },
+  {
+   "id": "gcp-ai-ml",
+   "name": "Google Cloud Blog — AI & ML",
+   "grade": "A",
+   "url": "https://cloudblog.withgoogle.com/products/ai-machine-learning/rss/"
+  },
+  {
+   "id": "gcp-vertex-release",
+   "name": "Vertex AI 릴리스 노트",
+   "grade": "A",
+   "url": "https://cloud.google.com/feeds/vertex-ai-release-notes.xml"
+  },
+  {
+   "id": "gcp-bigquery-release",
+   "name": "BigQuery 릴리스 노트",
+   "grade": "A",
+   "url": "https://cloud.google.com/feeds/bigquery-release-notes.xml"
+  },
+  {
+   "id": "palantir-blog",
+   "name": "Palantir 블로그",
+   "grade": "A",
+   "url": "https://blog.palantir.com/feed"
+  },
+  {
+   "id": "gartner-news",
+   "name": "Gartner 발표(뉴스 집계 경유)",
+   "grade": "A",
+   "url": "https://news.google.com/rss/search?q=site:gartner.com&hl=en-US&gl=US&ceid=US:en"
   }
  ],
  "github_releases": [
@@ -124,7 +160,7 @@
    "repo": "vllm-project/vllm"
   }
  ],
- "_grade_note": "벤더 블로그(dbt·Astronomer·Databricks)는 출처가 A여도 자기 제품이 낫다는 비교 주장은 큐레이션에서 D로 매긴다. B 블로그는 도입·운영 사례 글만 남긴다.",
+ "_grade_note": "벤더 블로그(dbt·Astronomer·Databricks)는 출처가 A여도 자기 제품이 낫다는 비교 주장은 큐레이션에서 D로 매긴다. B 블로그는 도입·운영 사례 글만 남긴다. Gartner 등 분석기관 발표는 출처 A로 두되, 시장 수치·순위 주장은 방법론 비공개이므로 큐레이션에서 주장 단위로 낮출 수 있다. Gartner 링크는 뉴스 집계(news.google.com) 경유 — 리다이렉트가 gartner.com으로 열리는지 URL 확인 단계가 거른다.",
  "_doc_note": "doc_pages: 정적 HTML 자료 페이지의 PDF 링크를 항목으로 수집(JS 렌더링 페이지 불가 — AWS 백서 목록·CNCF reports는 2026-10-29 확인 결과 JS라 등록 못 함). 백서류 PDF는 주로 피드 글 본문에서 자동 회수된다(render_queue). 정적 페이지를 찾으면 여기에 {id,name,grade,url}로 추가.",
  "doc_pages": []
 }

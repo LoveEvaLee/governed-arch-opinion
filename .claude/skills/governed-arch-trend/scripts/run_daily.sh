@@ -52,9 +52,11 @@ send_weekly() {
   fi
 }
 
-# 오늘 몫이 이미 끝났으면 메일만 확인하고 종료
+# 오늘 몫이 이미 끝났으면 Zotero 미등록분·메일만 확인하고 종료
 if [ -f "$DATA/digests/$TODAY.json" ] && [ -f "$GAT_STATE/queue/$TODAY.md" ]; then
-  echo "[skip] 오늘($TODAY) 큐 노트 있음" >> "$LOG"; send_weekly; push_state "메일"; exit 0
+  echo "[skip] 오늘($TODAY) 큐 노트 있음" >> "$LOG"
+  python3 "$SCRIPTS/register_zotero.py" >> "$LOG" 2>&1 || echo "[!] Zotero 등록 실패 — 다음 실행에서 재시도" >> "$LOG"
+  send_weekly; push_state "메일"; exit 0
 fi
 
 # 1. 감시 목록
@@ -118,10 +120,12 @@ else
   fi
 fi
 
-# 5. 큐 노트 (URL 확인 포함) · 6. 월요일 요약 메일
-echo "[3/4] 큐 노트" >> "$LOG"
+# 5. 큐 노트 (URL 확인 · 자료 PDF 다운로드 포함) · 6. Zotero 그룹 등록 · 7. 월요일 요약 메일
+echo "[3/5] 큐 노트" >> "$LOG"
 python3 "$SCRIPTS/render_queue.py" "$TODAY" >> "$LOG" 2>&1
-echo "[4/4] 주간 메일(월요일만)" >> "$LOG"
+echo "[4/5] Zotero 그룹 등록(자료 후보)" >> "$LOG"
+python3 "$SCRIPTS/register_zotero.py" >> "$LOG" 2>&1 || echo "[!] Zotero 등록 실패 — 다음 실행에서 재시도" >> "$LOG"
+echo "[5/5] 주간 메일(월요일만)" >> "$LOG"
 send_weekly
 push_state "큐"
 echo "===================== $(date) 완료 =====================" >> "$LOG"

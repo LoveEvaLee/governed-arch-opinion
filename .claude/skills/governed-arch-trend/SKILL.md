@@ -15,6 +15,7 @@ description: ① 동향수집의 정기 실행 — 수집이 끝난 영역(refs)
 | 후보마다 출처 · 날짜 · 주장 단위 등급 · 걸리는 평가 축을 붙인다 | 판정(상 · 중 · 하) 내기 |
 | URL이 실제로 열리는지 확인한다 | 열리지 않는 URL을 후보로 올리기 |
 | 후보가 PDF거나 본문에 백서 · 보고서 PDF가 걸려 있으면 `files/`로 내려받아 노트에 경로를 적는다 | JS 렌더링 자료실 긁기, 25MB 초과 파일 받기 |
+| 자료가 있는 후보를 Zotero **그룹 라이브러리**(`governed-arch*`)에 서지로 등록한다 — 지식스토어(Zotero MCP) 조회용 | 개인 라이브러리(논문 — 헤르메스)에 넣기, 파일 업로드(스토리지 사용) |
 | 주 1회 요약 메일을 개인 메일로 보낸다 | 회사 정보 · `private/` 읽기 |
 
 ## 구성
@@ -34,7 +35,8 @@ VM은 공개 저장소를 읽기만 한다. 그래서 refs의 감시 대상은 �
 3. `match.py` — 선택지 별칭 매칭(「선택지」 풀)과 영역 키워드 매칭(「영역 키워드」 풀, 영역당 15건까지) → `_data/matched/{날짜}.json`
 4. 큐레이션(headless Claude, 아래 규칙) → `_data/digests/{날짜}.json`
 5. `render_queue.py` — URL 확인 후 `queue/{날짜}.md`. 이때 후보가 PDF거나 본문에 백서류 PDF 링크(whitepaper · report · guide · 백서 · 보고서 등)가 있으면 `files/{날짜}/`로 내려받고(후보당 2개 · 하루 5개 · 파일당 25MB 상한, `_data/files_ledger.json`으로 중복 차단) 노트의 「자료(내려받음)」 행에 링크를 적는다 — 다운로드 실패는 큐 노트 생성을 막지 않는다
-6. 월요일에는 `weekly_mail.py` — 지난 7일 요약을 개인 메일로
+6. `register_zotero.py` — 자료가 있는 후보(최근 14일 미등록분 소급)를 Zotero 그룹 라이브러리에 report 서지로 등록(태그 `gat/{영역}` · `gat/daily/{날짜}`, extra에 등급·로컬 경로, 장부 `_data/zotero_registered.json`). 그룹(`governed-arch*`)이 없으면 **개인 라이브러리에 넣지 않고 보류** — 논문 라이브러리 오염 방지. 키는 ZOTERO_API_KEY(VM `.harness-env`) → 맥 키체인 `zotero-api`
+7. 월요일에는 `weekly_mail.py` — 지난 7일 요약을 개인 메일로
 
 ## 큐레이션 규칙 (4단계 — headless Claude가 따른다)
 
@@ -105,3 +107,5 @@ VM은 공개 저장소를 읽기만 한다. 그래서 refs의 감시 대상은 �
 신설(2026-10-11). 감시 영역 2개 — ETL · 오케스트레이션(선택지 6), AI · 에이전트 플랫폼(선택지 6, 2026-10-11 추가). 소스 20개(피드 15 · GitHub 릴리스 5, 2026-10-11 열어 확인). Azure 업데이트 RSS는 403이라 뺐다 — Azure 선택지가 있는 영역을 수집할 때 대체 피드를 찾는다.
 
 자료(PDF) 수집 추가(2026-10-29) — 후보의 백서 · 보고서 PDF 자동 다운로드와 `doc_pages` 소스 타입. AWS 백서 목록 · CNCF reports는 JS 렌더링이라 `doc_pages`에 못 넣었다(확인 2026-10-29) — 백서류는 주로 피드 발표 글 본문에서 회수되고, 정적 자료 페이지를 찾으면 그때 등록한다.
+
+Zotero 그룹 등록 추가(2026-10-29) — **유경 액션 1회 대기**: zotero.org/groups/new 에서 비공개 그룹(이름 `governed-arch-refs` 권장, Membership: closed)을 만들면 다음 실행부터 자동 탐색·등록된다(기존 API 키의 groups 권한은 all write로 확인). 그룹 생성 전에는 매 실행 "등록 보류" 로그만 남는다.
